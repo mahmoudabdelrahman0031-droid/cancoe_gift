@@ -171,14 +171,15 @@
     position:relative; width:100%; aspect-ratio:3/4; border-radius:18px;
     overflow:hidden; box-shadow:var(--shadow); background:var(--bronze-deep);
   }
-  .slide{
+  ..slide{
     position:absolute; inset:0; display:flex; flex-direction:column;
     align-items:center; justify-content:center; color:var(--pink-soft);
     opacity:0; transform:scale(1.04); cursor:pointer;
+    pointer-events:none;
     transition:opacity .5s ease, transform .5s ease;
     background-size:cover; background-position:center;
   }
-  .slide.active{ opacity:1; transform:scale(1); }
+  .slide.active{ opacity:1; transform:scale(1); pointer-events:auto; }
   .slide .fallback-icon{ font-size:40px; }
   .slide-caption{
     position:absolute; inset:0;
