@@ -366,22 +366,25 @@
     document.getElementById('fullMessage').textContent =
       row.message || 'We put together something sweet, just for you, and we hope it brings a smile.';
 
-    const photos = [row.photo1, row.photo2, row.photo3].filter(Boolean);
-    const captions = [row.caption1, row.caption2, row.caption3];
+    const pairs = [
+      {url: row.photo1, caption: row.caption1},
+      {url: row.photo2, caption: row.caption2},
+      {url: row.photo3, caption: row.caption3},
+    ].filter(p => p.url || p.caption);
     const slidesWrap = document.getElementById('slides');
     slidesWrap.innerHTML = '';
-    const list = photos.length ? photos : [null, null, null];
-    list.forEach((url, i) => {
+    const list = pairs.length ? pairs : [{url:null,caption:null},{url:null,caption:null},{url:null,caption:null}];
+    list.forEach((item, i) => {
       const d = document.createElement('div');
       d.className = 'slide' + (i===0 ? ' active' : '');
-      if(url){
-        d.style.backgroundImage = `url('${url}')`;
+      if(item.url){
+        d.style.backgroundImage = `url('${item.url}')`;
       } else {
         d.innerHTML = '<div class="fallback-icon">🍬</div>';
       }
       const cap = document.createElement('div');
       cap.className = 'slide-caption';
-      const capText = captions[i] || 'A little note for you 💛';
+      const capText = item.caption || 'A little note for you 💛';
       cap.innerHTML = `<p>${capText}</p>`;
       d.appendChild(cap);
       const hint = document.createElement('div');
