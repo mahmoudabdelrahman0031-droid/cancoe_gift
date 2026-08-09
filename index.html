@@ -438,7 +438,8 @@
       document.getElementById('loadingScreen').style.display = 'none';
       return;
     }
-    Papa.parse(SHEET_CSV_URL, {
+    const freshUrl = SHEET_CSV_URL + (SHEET_CSV_URL.includes('?') ? '&' : '?') + 'nocache=' + Date.now();
+    Papa.parse(freshUrl, {
       download: true,
       header: true,
       complete: function(results){
